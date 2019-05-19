@@ -26,6 +26,7 @@ class CreateBaseTables extends Migration
         {
             $table->bigIncrements('id');
             $table->text('name');
+            $table->text('repository');
             $table->bigInteger('tournament_id');
             $table->bigInteger('robot_type_id');
             $table->timestampTz('created_at');
