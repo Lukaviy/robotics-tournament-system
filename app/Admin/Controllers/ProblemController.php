@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Tournament;
+use App\Models\Problem;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -48,7 +48,7 @@ class ProblemController extends Controller
 
     protected function grid() : Grid
     {
-        $grid = new Grid(new Tournament);
+        $grid = new Grid(new Problem);
 
         $grid->id('Id');
         $grid->name('Name');
@@ -60,7 +60,7 @@ class ProblemController extends Controller
 
     protected function detail($id) : Show
     {
-        $show = new Show(Tournament::findOrFail($id));
+        $show = new Show(Problem::findOrFail($id));
 
         $show->id('Id');
         $show->name('Name');
@@ -72,7 +72,7 @@ class ProblemController extends Controller
 
     protected function form() : Form
     {
-        $form = new Form(new Tournament);
+        $form = new Form(new Problem);
 
         $form->textarea('name', 'Name');
 
