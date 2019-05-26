@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
+use Encore\Admin\Grid\Displayers\Actions;
+use Encore\Admin\Grid\Tools;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
@@ -49,6 +51,19 @@ class UserController extends Controller
     protected function grid() : Grid
     {
         $grid = new Grid(new User);
+        $grid->disableExport();
+        $grid->disableRowSelector();
+        $grid->tools(function (Tools $tools) : void
+        {
+            $tools->disableRefreshButton(true);
+            $tools->disableBatchActions(true);
+            $tools->disableFilterButton(true);
+        });
+        $grid->actions(function (Actions $actions) : void
+        {
+            $actions->disableDelete();
+        });
+        $grid->disableColumnSelector();
 
         $grid->id('Id');
         $grid->name('Name');

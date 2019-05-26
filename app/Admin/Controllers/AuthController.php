@@ -55,7 +55,7 @@ class AuthController extends BaseAuthController
         $user->name = $request->get('username');
         $user->password = Hash::make($request->get('password'));
         $user->save();
-        $user->roles()->attach(AdminRole::where('name', AdminRole::USER)->first()->id);
+        $user->roles()->attach(AdminRole::where('name', AdminRole::ADMIN)->first()->id);
 
         $this->guard()->login($user);
 
