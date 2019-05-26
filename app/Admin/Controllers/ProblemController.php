@@ -84,7 +84,27 @@ class ProblemController extends Controller
         $show->name('Name');
         $show->created_at('Created at');
         $show->updated_at('Updated at');
+        $show->tournaments('Tournament', function (Grid $grid) : void
+        {
+            $grid->disableExport();
+            $grid->disableRowSelector();
+            $grid->tools(function (Tools $tools) : void
+            {
+                $tools->disableRefreshButton(true);
+                $tools->disableBatchActions(true);
+                $tools->disableFilterButton(true);
+            });
+            $grid->actions(function (Actions $actions) : void
+            {
+                $actions->disableDelete();
+            });
+            $grid->disableColumnSelector();
 
+            $grid->id('Id');
+            $grid->name('Name');
+            $grid->created_at('Created at');
+            $grid->updated_at('Updated at');
+        });
         return $show;
     }
 
