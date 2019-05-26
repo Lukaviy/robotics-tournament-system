@@ -287,6 +287,8 @@ class Solution extends BaseModel
  */
 class Problem extends BaseModel
 {
+    public $timestamps = true;
+
     public function tournaments() : BelongsToMany
     {
         return $this->belongsToMany(Tournament::class);

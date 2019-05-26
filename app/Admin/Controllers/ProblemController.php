@@ -94,7 +94,7 @@ class ProblemController extends Controller
 
         $form->text('name', 'Name');
         $form->text('repository', 'Repository');
-        $form->multipleSelect('tournament_id', 'Tournament')->options(Tournament::all()->pluck('name', 'id'));
+        $form->multipleSelect('tournaments', 'Tournament')->options(Tournament::all()->pluck('name', 'id'));
         $form->select('robot_type_id', 'Robot Type')->options(RobotType::all()->pluck('name', 'id'));
 
         return $form;
