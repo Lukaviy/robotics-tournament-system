@@ -30,6 +30,8 @@ use Storage;
  */
 class BaseModel extends Model
 {
+    public $timestamps = false;
+
     protected $dateFormat = 'Y-m-d H:i:sO';
 
     public function save(array $options = [])
@@ -163,6 +165,8 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
 {
     use Authenticatable, CanResetPassword, MustVerifyEmail, Notifiable, AdminBuilder, HasPermissions;
 
+    public $timestamps = true;
+
     protected $fillable = ['name', 'email', 'password'];
     protected $hidden = ['password', 'remember_token'];
     protected $casts = ['email_verified_at' => 'datetime'];
@@ -215,7 +219,9 @@ class User extends BaseModel implements AuthenticatableContract, CanResetPasswor
  */
 class RobotType extends BaseModel
 {
-
+    public function name() : string {
+        return $this->name;
+    }
 }
 
 /**
@@ -281,9 +287,9 @@ class Solution extends BaseModel
  */
 class Problem extends BaseModel
 {
-    public function tournament() : BelongsTo
+    public function tournaments() : BelongsToMany
     {
-        return $this->belongsTo(Tournament::class);
+        return $this->belongsToMany(Tournament::class);
     }
 
     public function robotType() : BelongsTo
@@ -313,8 +319,8 @@ class Tournament extends BaseModel
 {
     public $timestamps = true;
 
-    public function problems() : HasMany
+    public function problems() : BelongsToMany
     {
-        return $this->hasMany(Problem::class);
+        return $this->BelongsToMany(Problem::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Problem;
 use App\Models\Tournament;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -89,7 +90,8 @@ class TournamentController extends Controller
     {
         $form = new Form(new Tournament);
 
-        $form->textarea('name', 'Name');
+        $form->text('name', 'Name');
+        $form->multipleSelect('problems', 'Name')->options(Problem::all()->pluck('name', "id"));
 
         return $form;
     }

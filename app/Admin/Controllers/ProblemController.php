@@ -4,6 +4,8 @@ namespace App\Admin\Controllers;
 
 use App\Models\Problem;
 use App\Http\Controllers\Controller;
+use App\Models\RobotType;
+use App\Models\Tournament;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -90,7 +92,10 @@ class ProblemController extends Controller
     {
         $form = new Form(new Problem);
 
-        $form->textarea('name', 'Name');
+        $form->text('name', 'Name');
+        $form->text('repository', 'Repository');
+        $form->multipleSelect('tournament_id', 'Tournament')->options(Tournament::all()->pluck('name', 'id'));
+        $form->select('robot_type_id', 'Robot Type')->options(RobotType::all()->pluck('name', 'id'));
 
         return $form;
     }

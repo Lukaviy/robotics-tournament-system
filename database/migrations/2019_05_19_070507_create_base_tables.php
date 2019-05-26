@@ -27,13 +27,21 @@ class CreateBaseTables extends Migration
             $table->bigIncrements('id');
             $table->text('name');
             $table->text('repository');
-            $table->bigInteger('tournament_id');
             $table->bigInteger('robot_type_id');
             $table->timestampTz('created_at');
             $table->timestampTz('updated_at');
 
             $table->foreign('robot_type_id')->on('robot_types')->references('id');
+        });
+
+        Schema::create('problem_tournament', function (Blueprint $table) : void {
+            $table->bigInteger('problem_id');
+            $table->bigInteger('tournament_id');
+
+            $table->foreign('problem_id')->on('problems')->references('id');
             $table->foreign('tournament_id')->on('tournaments')->references('id');
+
+            $table->unique(['problem_id', 'tournament_id']);
         });
 
         Schema::create('solutions', function (Blueprint $table) : void

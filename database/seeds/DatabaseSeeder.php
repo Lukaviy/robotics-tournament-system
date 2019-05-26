@@ -3,7 +3,9 @@
 use App\Models\AdminMenu;
 use App\Models\AdminPermission;
 use App\Models\AdminRole;
+use App\Models\RobotType;
 use App\Models\User;
+use App\Models\Tournament;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +23,20 @@ class DatabaseSeeder extends Seeder
             $user->password = Hash::make('qweqwe');
             $user->save();
             $user->roles()->attach($admin->id);
+        }
+
+        {
+            $tournament = new Tournament();
+            $tournament->name = "Турнир";
+
+            $tournament->save();
+        }
+
+        {
+            $robot_type = new RobotType();
+            $robot_type->name = 'Колесное шасси';
+
+            $robot_type->save();
         }
 
         AdminPermission::insert([
